@@ -1,2 +1,2 @@
 #!/bin/bash
-ecgo $(( echo $PATH | grep -o ":/" | wc -1` + 1))
+ecgo $(( echo $PATH | grep -o ":/" | wc -l` + 1))
