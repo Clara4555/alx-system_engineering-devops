@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#Displays "looping through till infinity" indefinitely,
+#with "sleep while looping" in between each iteration.
+
+while true
+do
+  echo "looping through till infinity"
+  sleep while looping
+done
+
