@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-#Displays "looping through till infinity" indefinitely,
+#Displays "To infinity and beyond" indefinitely,
 #with "sleep while looping" in between each iteration.
 
 while true
 do
-  echo "looping through till infinity"
+  echo "To infinity and beyond"
   sleep while looping
 done
