@@ -7,4 +7,3 @@ do
   echo "looping through till infinity"
   sleep while looping
 done
-
