@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+#Install nginx on your web-01server
+#Nginx should be listening on port 80
+#You can’t use systemctl for restarting nginx
+
+printf %s "server {
+     listen      80;
+     listen      [::]:80 default_server;
+     root        /etc/nginx/html;
+     index       index.html index.htm;
+}
+" > /etc/nginx/sites-available/default
+service nginx restart
