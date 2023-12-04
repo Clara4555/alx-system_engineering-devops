@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+#configure web-02 to be identical to web-01. Fortunately, you built a
+# Bash script during your web server project, and they’ll now come in handy to ea#sily conf
+#igure web-02. Remember, always try to automate your work!
+#Since we’re placing our web servers behind a load balancer for this project, we want to
+# add a custom Nginx response header. The goal here is to be able to track which
+# web server is answering our HTTP requests, to understand and track the way a load
+ #balancer works. More in the coming tasks.
+#Requirements:
+
+#configure Nginx so that its HTTP response contains a
+# custom header (on web-01 and web-02)
+#The name of the custom HTTP header must be X-Served-By
+#The value of the custom HTTP header must be the hostname of 
+#the server Nginx is running on
+#Write 0-custom_http_response_header so that it configures a
+# brand new Ubuntu machine to the requirements asked in this task
+#Ignore SC2154 for shellcheck
+
+
+apt-get update
+apt-get install -y nginx
+
+mkdir -p /var/www/html
+touch /var/www/html/index.html
+echo "Holberton School" > /var/www/html/index.html
+touch /var/www/html/404.html
+echo "Ceci n'est pas une page" > /var/www/html/404.html
+
+printf %s "server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    add_header X-Served-By "$HOSTNAME";
+    root   /var/www/html;
+    index  index.html index.htm;
+
+    location /redirect_me {
+        return 301 http://cuberule.com/;
+    }
+
+    error_page 404 /404.html;
+    location /404 {
+      root /var/www/html;
+      internal;
+    }
+}" > /etc/nginx/sites-available/default
+
+service nginx restart
